@@ -1,0 +1,14 @@
+services:
+  miniforces:
+    build: .
+    ports:
+      - "3000:3000"
+    env_file: .env            # ADMIN_PASSWORD and the other settings
+    volumes:
+      - ./data:/app/data      # the database; back this folder up
+    restart: unless-stopped
+    # Optional: lets the judge put student programs in a network-less namespace.
+    # Without it they still run as an unprivileged user with CPU/memory/process limits,
+    # but could reach the network. Uncomment if you want that extra isolation.
+    # cap_add:
+    #   - SYS_ADMIN
